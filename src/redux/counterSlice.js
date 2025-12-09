@@ -1,6 +1,6 @@
 import React from 'react';
 import { createSlice } from '@reduxjs/toolkit';
-import { name } from 'ejs';
+
 
 const counterSlice = createSlice({
 name:'counter',
