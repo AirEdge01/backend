@@ -21,7 +21,7 @@ export default function Signup() {
         const newUser = { firstName, lastName, email, password };
 
 
-        axios.post('https://react-4dfo.onrender.com/user/signup', newUser)
+        axios.post('https://react-xkrr.onrender.com', newUser)
             .then((res) => {
                 // console.log('Response:', res);
                 alert('Signing up successful! please login')
