@@ -39,7 +39,7 @@ export default function Signup() {
         <div style={styles.page}>
             <div style={styles.card}>
                 <h2 style={styles.title}>Create an Account</h2>
-                <p style={styles.subtitle}>Join our community today</p>
+                <p style={styles.subtitle}>Join our community today and make the world</p>
 
                 <form onSubmit={handleSubmit} style={styles.form}>
                     <input
