@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 export default function Signup() {
     const [firstName, setFirstName] = useState("");
@@ -8,6 +9,7 @@ export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,14 +20,15 @@ export default function Signup() {
 
         const newUser = { firstName, lastName, email, password };
 
-        axios.post('http://localhost:3600/user/signup', newUser)
+
+        axios.post('https://react-4dfo.onrender.com/user/signup', newUser)
             .then((res) => {
-                console.log('Response:', res);
+                // console.log('Response:', res);
                 alert('Signing up successful! please login')
                 navigate('/Signingin');
             })
             .catch((err) => {
-                console.error('Error', err.response ? err.response.data : err);
+                // console.error('Error', err.response ? err.response.data : err);
                 alert('Signup failed,try again')
 
             })
@@ -63,15 +66,25 @@ export default function Signup() {
                         onChange={(e) => setEmail(e.target.value)}
                         style={styles.input}
                     />
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        // value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        style={styles.input}
-                    />
-
+                    <div style={styles.passwordWrapper}>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            name="password"
+                            placeholder="Password"
+                            className="auth-input"
+                            // value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            style={{ ...styles.input, paddingRight: '44px' }}
+                        />
+                        <span
+                            role="button"
+                            aria-label={showPassword ? 'Hide password' : 'Show password'}
+                            onClick={() => setShowPassword(!showPassword)}
+                            style={styles.eyeIcon}
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    </div>
                     <button type="submit" style={styles.button}>
                         Sign Up
                     </button>
@@ -125,6 +138,26 @@ const styles = {
         fontSize: "15px",
         outline: "none",
         transition: "0.3s",
+        width: '100%',
+        boxSizing: 'border-box',
+    },
+    passwordWrapper: {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+    },
+    eyeIcon: {
+        position: 'absolute',
+        right: '12px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        color: '#777',
+        cursor: 'pointer',
+        fontSize: '18px',
+        display: 'flex',
+        alignItems: 'center',
+        zIndex: 3,
     },
     button: {
         background: "#0b7a35",
