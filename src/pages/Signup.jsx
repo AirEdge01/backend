@@ -20,18 +20,19 @@ export default function Signup() {
 
         const newUser = { firstName, lastName, email, password };
 
+        axios.post('https://react-xkrr.onrender.com/user/signup', newUser)
 
-        axios.post('https://react-xkrr.onrender.com', newUser)
             .then((res) => {
-                // console.log('Response:', res);
+                console.log('Response:', res);
                 alert('Signing up successful! please login')
                 navigate('/Signingin');
             })
             .catch((err) => {
-                // console.error('Error', err.response ? err.response.data : err);
+                console.error('Error', err.response ? err.response.data : err);
                 alert('Signup failed,try again')
-
             })
+
+        
 
     };
 
@@ -93,6 +94,8 @@ export default function Signup() {
         </div>
     );
 }
+
+
 
 const styles = {
     page: {
